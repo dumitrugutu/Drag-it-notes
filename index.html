@@ -10,23 +10,21 @@
 	<body>
 		<div id="react-container">
 			<script type="text/babel">
-			// stateless functional component
-			const MyComponent = () => {
-				return <div>
-								<h1>Hello World</h1>
-								<p>This is my first React component!</p>
-							</div>
-			}
-				// class MyComponent extends React.Component {
-				// 	render() {
-				// 		return <div>
-				// 				<h1>Hello World</h1>
-				// 				<p>This is my first React component!</p>
-				// 				</div>
-				// 	}
-				// }
+			var Note = React.createClass({
+				render() {
+					return (
+						<div className="note">
+							<p></p>
+							<span>
+								<button>EDIT</button>
+								<button>X</button>
+							</span>
+						</div>
+						)
+				}
+			})
 
-				ReactDOM.render(<MyComponent />,
+				ReactDOM.render(<Note></Note>,
 					document.getElementById('react-container'))
 			</script>
 		</div>
