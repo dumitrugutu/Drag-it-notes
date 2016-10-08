@@ -19,11 +19,11 @@
 						this.setState({editing: true})
 					},
 					save() {
-						var val = this.refs.newText.value
+						this.props.onChange(this.refs.newText.value, this.props.id)
 						this.setState({editing: false})
 					},
 					remove() {
-						alert("Removing Note")
+						this.props.onRemove(this.props.id)
 					},
 					renderForm() {
 						return (
@@ -50,7 +50,6 @@
 						
 					}
 				})
-
 				var Board = React.createClass({
 					propTypes: {
 						count: function(props, propName) {
@@ -63,7 +62,6 @@
 							}
 						}
 					},
-
 					getInitialState() {
 						return {
 							notes: [
@@ -74,7 +72,6 @@
 							]
 						}
 					},
-
 					update(newText, id) {
 						var notes = this.state.notes.map(
 							note => (note.id !== id) ?
@@ -86,12 +83,10 @@
 							)
 						this.setState({notes})
 					},
-
 					remove(id) {
 						var notes = this.state.notes.filter(note => note.id !== id)
 						this.setState({notes})
 					},
-
 					eachNote(note) {
 						return (<Note key={note.id}
 													id={note.id}
@@ -101,7 +96,6 @@
 										</Note>
 						)
 					},
-
 					render() {
 						return(<div className="board">
 								    {this.state.notes.map(this.eachNote)}
