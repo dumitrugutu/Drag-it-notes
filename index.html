@@ -67,20 +67,45 @@
 					getInitialState() {
 						return {
 							notes: [
-								"Do something",
-								"Do something else",
-								"Do more of the first",
-								"Stop"
+								{id: 0, note: "Do something"},
+								{id: 1, note: "Do something else"},
+								{id: 2, note: "Do more of the first"},
+								{id: 3, note: "Stop"}
 							]
 						}
 					},
 
+					update(newText, id) {
+						var notes = this.state.notes.map(
+							note => (note.id !== id) ?
+								note :
+									{
+										...note,
+										note: newText
+									}
+							)
+						this.setState({notes})
+					},
+
+					remove(id) {
+						var notes = this.state.notes.filter(note => note.id !== id)
+						this.setState({notes})
+					},
+
+					eachNote(note) {
+						return (<Note key={note.id}
+													id={note.id}
+													onChange={this.update}
+													onRemove={this.remove}>
+												{note.note}
+										</Note>
+						)
+					},
+
 					render() {
 						return(<div className="board">
-							{this.state.notes.map((note, i) => {
-								return <Note key={i}>{note}</Note>
-							})}
-							</div>)
+								    {this.state.notes.map(this.eachNote)}
+									</div>)
 					}
 				})
 
