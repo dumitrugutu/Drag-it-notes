@@ -21,6 +21,15 @@
 							top: this.randomBetween(0, window.innerWidth - 150, 'px')
 						}
 					},
+					componentDidUpdate() {
+						if (this.state.editing) {
+							this.refs.newText.focus()
+							this.refs.newText.select()
+						}
+					},
+					shouldComponentUpdate(nextProps, nextState) {
+						return this.props.children !== nextProps.children || this.state !== nextState
+					},
 					randomBetween(x, y, s) {
 						return (x + Math.ceil(Math.random() * (y - x))) + s
 					},
@@ -36,9 +45,8 @@
 					},
 					renderForm() {
 						return (
-							<div className="note"
-										style={this.style}>
-								<textarea ref="newText"></textarea>
+							<div className="note" style={this.style}>
+								<textarea ref="newText" defaultValue={this.props.children}></textarea>
 								<button onClick={this.save}>SAVE</button>
 							</div>
 						)
