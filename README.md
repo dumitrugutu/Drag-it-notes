@@ -34,4 +34,4 @@ var Note = React.createClass({
   }
   ...
   ```
-  ![note] (note.png)
+  ![Notes screenshot](note.png)
